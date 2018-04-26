@@ -1,5 +1,6 @@
 package com.liucz.consumer;
 
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;
@@ -13,10 +14,19 @@ public class Consumer1{
 
     // 使用JmsListener配置消费者监听的队列，其中text是接收到的消息
     @JmsListener(destination = "message.queue")
-    @SendTo("out.queue")
-    public String receiveQueue(String text) {
-        logger.info("发送消息:"+text);
-        return "return message"+text;
+    @SendTo("messageOut.queue")
+    public String receiveQueue(String objText) {
+        logger.info("发送消息:"+objText);
+
+        JSONObject item = JSONObject.fromObject(objText);
+        logger.info("模板ID："+item.get("template_id"));
+
+        JSONObject result = new JSONObject();
+        result.put("errcode",0);
+        result.put("errmsg","ok");
+        result.put("msgid",200228332);
+
+        return result.toString();
     }
 
 }

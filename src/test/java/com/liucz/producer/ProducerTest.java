@@ -1,5 +1,8 @@
 package com.liucz.producer;
 
+import com.liucz.Component.CommonComponent;
+import com.liucz.base.TemplateItem;
+import net.sf.json.JSONObject;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +24,8 @@ public class ProducerTest {
 
     @Autowired
     private Producer producer;
+    @Autowired
+    CommonComponent commonComponent;
 
     @Test
     public void sendMessage() {
@@ -28,7 +33,21 @@ public class ProducerTest {
         Destination message = new ActiveMQQueue("message.queue");
         Destination log = new ActiveMQQueue("log.queue");
 
-        producer.sendMessage(message, "生产者发送了消息");
+        //模拟微信模板消息
+        JSONObject temp = new JSONObject();
+        temp.put("touser","OPENID");
+        temp.put("template_id","ngqIpbwh8bUfcSsECmogfXcV14J0tQlEpBO27izEYtY");
+        temp.put("url","http://weixin.qq.com/download");
+
+        JSONObject data = new JSONObject();
+        data.put("first",commonComponent.getTempItem("恭喜你购买成功！"));
+        data.put("keyword1",commonComponent.getTempItem("巧克力"));
+        data.put("keyword2",commonComponent.getTempItem("39.8元"));
+        data.put("keyword3",commonComponent.getTempItem("2014年9月22日"));
+        data.put("remark",commonComponent.getTempItem("欢迎再次购买！"));
+        temp.put("data",data);
+
+        producer.sendMessage(message, temp.toString());
         producer.sendMessage(log, "生产者发送了日志");
 
     }
