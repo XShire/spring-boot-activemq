@@ -26,6 +26,7 @@ public class Consumer1{
         result.put("errmsg","ok");
         result.put("msgid",200228332);
 
+        //不支持发送JSON对象，所以转为String类型
         return result.toString();
     }
 

@@ -47,6 +47,7 @@ public class ProducerTest {
         data.put("remark",commonComponent.getTempItem("欢迎再次购买！"));
         temp.put("data",data);
 
+        //不支持发送JSON对象，所以转为String类型
         producer.sendMessage(message, temp.toString());
         producer.sendMessage(log, "生产者发送了日志");
 
