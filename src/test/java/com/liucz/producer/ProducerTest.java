@@ -55,22 +55,4 @@ public class ProducerTest {
 
     }
 
-//    @Test
-//    public void send() {
-//        Destination message = new ActiveMQQueue("message.queue");
-//
-//        String touser = "OPENID";
-//        String template_id = "ngqIpbwh8bUfcSsECmogfXcV14J0tQlEpBO27izEYtY";
-//        String url = "http://weixin.qq.com/download";
-//        Map data = new HashMap();
-//        data.put("first",commonComponent.getTempItem("恭喜你购买成功！"));
-//        data.put("keyword1",commonComponent.getTempItem("巧克力"));
-//        data.put("keyword2",commonComponent.getTempItem("39.8元"));
-//        data.put("keyword3",commonComponent.getTempItem("2014年9月22日"));
-//        data.put("remark",commonComponent.getTempItem("欢迎再次购买！"));
-//        Template template = new Template(touser, template_id, url, data);
-//
-//        producer.send(message, template);
-//
-//    }
 }
