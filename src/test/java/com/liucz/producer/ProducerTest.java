@@ -36,7 +36,6 @@ public class ProducerTest {
     public void sendMessage() {
 
         Destination message = new ActiveMQQueue("message.queue");
-        Destination log = new ActiveMQQueue("log.queue");
 
         String touser = "OPENID";
         String template_id = "ngqIpbwh8bUfcSsECmogfXcV14J0tQlEpBO27izEYtY";
@@ -51,8 +50,16 @@ public class ProducerTest {
 
         //不支持发送JSON对象，所以转为String类型
         producer.sendMessage(message, template);
-        producer.sendMessage(log, "生产者发送了日志");
 
+    }
+
+    @Test
+    public void sendLog() {
+
+        Destination log = new ActiveMQTopic("log.topic");
+        for(int i=0;i<10;i++){
+            producer.sendMessage(log, "生产者发送了日志=="+i);
+        }
     }
 
 }

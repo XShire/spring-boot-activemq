@@ -11,7 +11,7 @@ public class LogConsumer2 {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // 使用JmsListener配置消费者监听的队列，其中text是接收到的消息
-    @JmsListener(destination = "log.queue")
+    @JmsListener(destination = "log.topic")
     public void receiveQueue(String text) {
         logger.info("发送日志2:"+text);
     }
