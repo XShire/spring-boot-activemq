@@ -17,4 +17,6 @@ public class Producer {
         jmsTemplate.convertAndSend(destination, message);
     }
 
+
+
 }

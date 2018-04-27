@@ -2,9 +2,9 @@ package com.liucz.producer;
 
 import com.liucz.Component.CommonComponent;
 import com.liucz.base.Template;
-import com.liucz.base.TemplateItem;
 import net.sf.json.JSONObject;
 import org.apache.activemq.command.ActiveMQQueue;
+import org.apache.activemq.command.ActiveMQTopic;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
