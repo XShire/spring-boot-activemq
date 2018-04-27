@@ -1,7 +1,6 @@
 package com.liucz.base;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Template implements Serializable {

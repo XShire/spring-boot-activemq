@@ -2,9 +2,6 @@ package com.liucz.producer;
 
 import com.liucz.Component.CommonComponent;
 import com.liucz.base.Template;
-import net.sf.json.JSONObject;
-import org.apache.activemq.command.ActiveMQQueue;
-import org.apache.activemq.command.ActiveMQTopic;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -12,9 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.jms.Destination;
-import javax.jms.ObjectMessage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,8 +29,6 @@ public class ProducerTest {
     @Test
     public void sendMessage() {
 
-        Destination message = new ActiveMQQueue("message.queue");
-
         String touser = "OPENID";
         String template_id = "ngqIpbwh8bUfcSsECmogfXcV14J0tQlEpBO27izEYtY";
         String url = "http://weixin.qq.com/download";
@@ -49,17 +41,26 @@ public class ProducerTest {
         Template template = new Template(touser, template_id, url, data);
 
         //不支持发送JSON对象，所以转为String类型
-        producer.sendMessage(message, template);
+        producer.sendMessageQueue(template);
 
     }
 
     @Test
-    public void sendLog() {
+    public void sendLoQueue() {
 
-        Destination log = new ActiveMQTopic("log.topic");
         for(int i=0;i<10;i++){
-            producer.sendMessage(log, "生产者发送了日志=="+i);
+            producer.sendLogQueue("生产者发送了日志=="+i);
         }
+
+    }
+
+    @Test
+    public void sendLogTopic() {
+
+        for(int i=0;i<10;i++){
+            producer.sendLogTopic("生产者发送了日志=="+i);
+        }
+
     }
 
 }
